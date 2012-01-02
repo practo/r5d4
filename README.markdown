@@ -1,4 +1,15 @@
 # Read Me
+r5d4 is an Analytics engine written in python using Redis datastore providing
+an HTTP API. Check the project wiki for more information.
+
+## What's In a Name
+r5d4 is a [Star Wars character](http://starwars.wikia.com/wiki/R5-D4) that has a bad motivator, whatever that means.
+
+```
+R5-D4 had a purpose. R5-D4 was placed as an intelligence gathering source in the office of the 
+Imperial Prefect's administrative assistant in Mos Eisley.
+```
+
 ## Prerequisites
 ### Core
 * redis - `sudo apt-get install redis-server`
