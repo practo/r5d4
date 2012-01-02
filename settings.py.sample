@@ -1,0 +1,22 @@
+# Copy the file to settings.py and modify accordingly
+
+# Security configuration
+DEBUG = False
+SECRET_KEY = "replace_this_with_something_unique_and_long"
+
+# Redis configuration
+REDIS_UNIX_SOCKET_PATH = '/tmp/redis.sock'
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+CONFIG_DB = 1  # Analytics definitions and channel subscription keys are here
+DEFAULT_DATA_DB = 2  # Default database to store data
+
+# Worker Log configuration
+WORKER_LOG = '/var/log/r5d4_worker.log'
+WORKER_LOG_LEVEL = 'INFO'
+WORKER_LOG_FORMAT = '%(levelname)s\t%(name)s\t%(asctime)s\t%(message)s'
+WORKER_LOG_DATE_FORMAT = '%Y-%m-%d %H:%M:%S %z'
+
+# Activity Log configuration
+ACTIVITY_LOG = '/var/log/r5d4_activity.log'
+ACTIVITY_LOG_DATE_FORMAT = '%Y-%m-%d %H:%M:%S %z'

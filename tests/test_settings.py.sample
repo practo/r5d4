@@ -1,0 +1,8 @@
+# Copy to test_settings.py and modify
+
+# WARNING: All the databases in this redis instance will be flushed
+# when running tests
+REDIS_UNIX_SOCKET_PATH = '/tmp/redis-test.sock'
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6380
+CONFIG_DB = 1
