@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>R5D4 by practo</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>R5D4</h1>
+        <h2>R5D4 is an Analytics engine written in python using Redis datastore providing an HTTP API</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/practo/r5d4/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/practo/r5d4/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/practo/r5d4" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p>r5d4 is an Analytics engine written in python using Redis datastore providing
+an HTTP API. Check the project wiki for more information.</p>
+
+<h2>What's In a Name</h2>
+
+<p>r5d4 is a <a href="http://starwars.wikia.com/wiki/R5-D4">Star Wars character</a> that has a bad motivator, whatever that means.</p>
+
+<pre><code>R5-D4 had a purpose. R5-D4 was placed as an intelligence gathering
+source in the office of the Imperial Prefect's administrative
+assistant in Mos Eisley.
+</code></pre>
+
+<h2>Prerequisites</h2>
+
+<h3>Core</h3>
+
+<ul>
+<li>redis - <code>sudo apt-get install redis-server</code>
+</li>
+<li>flask - <code>sudo easy_install flask</code>
+</li>
+<li>redis-py - <code>sudo easy_install redis</code>
+</li>
+</ul><h3>Optional</h3>
+
+<ul>
+<li>redis &gt;=2.2 - For making UNIX socket connections; Better network latency</li>
+<li>hiredis - <code>sudo easy_install hiredis</code> - Faster Redis operations</li>
+</ul><h3>Deployment</h3>
+
+<ul>
+<li>uwsgi - <code>sudo easy_install uwsgi</code>
+</li>
+<li>nginx &gt;0.8 - <code>sudo apt-get install nginx</code> | Ubuntu 10.04 users use <a href="http://wiki.nginx.org/Install#Ubuntu_PPA">nginx PPA</a>
+</li>
+</ul><h2>Installing (UWSGI + Nginx + Ubuntu)</h2>
+
+<ul>
+<li>A sample upstart script for starting UWSGI running flask and analytics worker
+is inside <code>scripts/upstart/</code> folder.</li>
+<li>A sample nginx configuration file for reverse proxying to flask app is inside
+<code>scripts/nginx_conf/</code> folder</li>
+<li>Install the upstart and nginx config files in <code>/etc/init/</code> and
+<code>/etc/nginx/sites-enabled/</code> respectively.</li>
+<li>The server can be started using:
+
+<ul>
+<li><code>sudo service uwsgi_r5d4 start</code></li>
+<li><code>sudo service nginx start</code></li>
+</ul>
+</li>
+</ul><h2>Verifying Installation</h2>
+
+<p>The following are some trivial tests to check whether the installation succeeded</p>
+
+<ul>
+<li>
+<code>redis-cli publish AnalyticsWorkerCmd refresh</code> should return <code>(integer) 1</code>
+</li>
+</ul>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
