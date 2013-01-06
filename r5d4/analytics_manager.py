@@ -5,7 +5,7 @@ from r5d4.analytics import Analytics
 from r5d4.settings import REDIS_UNIX_SOCKET_PATH, REDIS_HOST, REDIS_PORT, \
     CONFIG_DB
 from r5d4.flask_redis import get_conf_db
-from r5d4 import run
+from r5d4 import app
 
 
 class AnalyticsManager:
@@ -65,12 +65,12 @@ class AnalyticsManager:
         help - Display this\n""" % sys.argv[0])
 
 if __name__ == "__main__":
-    run.app.config['CONFIG_DB'] = CONFIG_DB
-    run.app.config['REDIS_HOST'] = REDIS_HOST
-    run.app.config['REDIS_PORT'] = REDIS_PORT
-    run.app.config['REDIS_UNIX_SOCKET_PATH'] = REDIS_UNIX_SOCKET_PATH
+    app.config['CONFIG_DB'] = CONFIG_DB
+    app.config['REDIS_HOST'] = REDIS_HOST
+    app.config['REDIS_PORT'] = REDIS_PORT
+    app.config['REDIS_UNIX_SOCKET_PATH'] = REDIS_UNIX_SOCKET_PATH
     if len(sys.argv) > 1:
-        amgr = AnalyticsManager(run.app)
+        amgr = AnalyticsManager(app)
         command = sys.argv[1].lower()
         args = sys.argv[2:]
 

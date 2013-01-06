@@ -11,7 +11,7 @@ from r5d4.mapping_functions import MEASURING_FUNCTIONS_MAP,\
 from r5d4.flask_redis import get_conf_db, get_data_db
 from r5d4.utility import construct_key
 from r5d4.logger import get_worker_log
-from r5d4 import run
+from r5d4 import app
 
 
 def actual_worker(analytics_name, sub, app):
@@ -223,7 +223,7 @@ def start_analytics_worker(app):
 
 
 if __name__ == "__main__":
-    p = start_analytics_worker(app=run.app)
+    p = start_analytics_worker(app=app)
     try:
         p.join()
     except KeyboardInterrupt:

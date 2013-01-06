@@ -59,8 +59,7 @@ def polish():
 
             # Run Tests
             info('Running tests...')
-            local('PYTHONPATH="%s" ./tests/run_tests.py' %
-                  os.path.dirname(ROOT_DIR))
+            local('PYTHONPATH="%s" ./tests/run_tests.py' % ROOT_DIR)
 
             # Remove compiled python classes
             info('Removing compiled python classes...')
