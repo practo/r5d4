@@ -24,8 +24,7 @@ activity_log = get_activity_log()
 def not_found_handler(error):
     error_response = json.dumps({
         "status": "Not Found",
-        "error_message": error.description[0],
-        "error_context": error.description[1]
+        "error_message": error.description
     }, indent=2)
     return Response(status=404, mimetype='application/json',
         response=error_response)
@@ -35,8 +34,7 @@ def not_found_handler(error):
 def bad_request_handler(error):
     error_response = json.dumps({
         "status": "Bad Request",
-        "error_message": error.description[0],
-        "error_context": error.description[1]
+        "error_message": error.description
     }, indent=2)
     return Response(status=400, mimetype='application/json',
         response=error_response)
