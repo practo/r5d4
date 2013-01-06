@@ -133,4 +133,4 @@ def construct_key(*args):
     return reduce(lambda x, y: x + ':' + y, flattened_args)
 
 if __name__ == "__main__":
-    print fmt_date(parse("Jan 31 2011"))  # suppress unused 'parse' warning
+    fmt_date(parse("Jan 31 2011"))  # suppress unused 'parse' warning

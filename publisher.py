@@ -10,14 +10,20 @@ def publish_transaction(channel, tr_type, payload):
     subscribed = conf_db.scard("Subscriptions:%s:ActiveAnalytics" % channel)
     if subscribed == 0:
         raise NotFound(("Channel not found",
-                "Channel '%(channel)s' is not found or has 0 subscriptions" %
-                locals()))
-    listened = conf_db.publish(channel,
+                        "Channel '%(channel)s' is not found or has 0 "
+                        "subscriptions" % locals()))
+    listened = conf_db.publish(
+        channel,
         '{'
         '  "tr_type" : "' + tr_type + '", '
         '  "payload" : ' + payload +
-        '}')
+        '}'
+    )
     if listened != subscribed:
-        raise ServiceUnavailable(("Subscription-Listened mismatch",
-                "Listened count = %d doesn't match Subscribed count = %d" % (
-                        listened, subscribed)))
+        raise ServiceUnavailable((
+            "Subscription-Listened mismatch",
+            "Listened count = %d doesn't match Subscribed count = %d" % (
+                listened,
+                subscribed
+            )
+        ))

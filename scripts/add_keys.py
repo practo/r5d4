@@ -22,8 +22,10 @@ class NotANumber(Exception):
         self.value = value
 
     def __unicode__(self):
-        return "Value '%s' for key '%s' is not a number" % (self.value, \
-                self.key)
+        return "Value '%s' for key '%s' is not a number" % (
+            self.value,
+            self.key
+        )
 
     def __str__(self):
         return self.__unicode__()
@@ -115,18 +117,20 @@ def add_db(source_socket, destination_socket, source_db, destination_db):
             raise UnsupportedKeyType(key_type, key)
 
 
-def print_usage():
-    print "Usage %s <source_socket> <destination_socket> <source_db> " \
-          "<temp_db> <destination_db>" % sys.argv[0]
-    print "WARNING: temp_db uses source_socket and existing keys will be " \
-          "flushed."
+def display_usage():
+    sys.stdout.write(
+        "Usage %s <source_socket> <destination_socket> <source_db> <temp_db> "
+        "<destination_db>\n" % sys.argv[0])
+    sys.stdout.write(
+        "WARNING: temp_db uses source_socket and existing keys will be "
+        "flushed.\n")
 
 if __name__ == "__main__":
     if len(sys.argv) != 6:
-        print_usage()
+        display_usage()
         sys.exit(0)
     source_socket, destination_socket, source_db, temp_db, destination_db = \
-            sys.argv[1:]
+        sys.argv[1:]
     clone_db(destination_socket, source_socket, destination_db, temp_db)
     add_db(source_socket, source_socket, source_db, temp_db)
     clone_db(source_socket, destination_socket, temp_db, destination_db)

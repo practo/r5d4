@@ -14,8 +14,8 @@ def publish(resource_json, resource_name, tr_type="insert"):
         })
 
         if rv.status_code != 202:
-            print "Unexpected status code: %d" % rv.status_code
-            print "Response was: %s" % rv.data
+            sys.stderr.write("Unexpected status code: %d\n" % rv.status_code)
+            sys.stderr.write("Response was: %s\n" % rv.data)
         if rv.status_code >= 500:
             break
 
@@ -28,4 +28,5 @@ if __name__ == "__main__":
         else:
             publish(resource_data, sys.argv[2])
     else:
-        print "Usage: %s data.json resource_name [tr_type]" % sys.argv[0]
+        sys.stderr.write("Usage: %s data.json resource_name [tr_type]\n" %
+                         sys.argv[0])

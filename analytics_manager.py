@@ -25,7 +25,7 @@ class AnalyticsManager:
         self.cdb.publish("AnalyticsWorkerCmd", "refresh")
 
     def dump_analytics(self, a_name=None):
-        if a_name == None:
+        if a_name is None:
             a_names = self.cdb.smembers("Analytics:Active")
             for a in a_names:
                 self.dump_analytics(a)
@@ -42,16 +42,18 @@ class AnalyticsManager:
 
     def enable_analytics(self, a_name):
         if not self.cdb.exists("Analytics:ByName:%s" % a_name):
-            print "Analytics is not loaded."
-            print "Use 'load' command and the analytics json file"
+            sys.stderr.write(
+                "Analytics is not loaded.\n"
+                "Use 'load' command and the analytics json file\n"
+            )
         self.cdb.sadd("Analytics:Active", a_name)
         subs = self.cdb.smembers("Analtyics:ByName:%s:Subscriptions" % a_name)
         for sub in subs:
             self.cdb.sadd("Subscriptions:%s:ActiveAnalytics" % sub, a_name)
         self.cdb.publish("AnalyticsWorkerCmd", "refresh")
 
-    def print_usage(self):
-        print """
+    def display_usage(self):
+        sys.stdout.write("""
         Usage: %s <command> [<arg>[...]]
         Commands:
         load - Loads one or more analytics from json file and Activates.
@@ -60,8 +62,7 @@ class AnalyticsManager:
         disable - Disables one or more analytics given by name.
         enable - Enables one or more analytics given by name.
         commands - Display this
-        help - Display this
-        """ % sys.argv[0]
+        help - Display this\n""" % sys.argv[0])
 
 if __name__ == "__main__":
     run.app.config['CONFIG_DB'] = CONFIG_DB
@@ -92,9 +93,10 @@ if __name__ == "__main__":
             for a_name in args:
                 amgr.enable_analytics(a_name)
         elif command == "commands" or command == "help":
-            amgr.print_usage()
+            amgr.display_usage()
         else:
-            print "Error: %s is not in the list of commands" % command
-            amgr.print_usage()
+            sys.stderr.write("Error: %s is not in the list of commands\n" %
+                             command)
+            amgr.display_usage()
     else:
-        amgr.print_usage()
+        amgr.display_usage()

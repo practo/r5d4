@@ -10,7 +10,7 @@ from r5d4.analytics_worker import start_analytics_worker
 from r5d4.analytics_manager import AnalyticsManager
 from r5d4.flask_redis import get_conf_db
 from r5d4.tests.test_settings import REDIS_UNIX_SOCKET_PATH, REDIS_HOST, \
-        REDIS_PORT, CONFIG_DB
+    REDIS_PORT, CONFIG_DB
 
 
 def load_tests(loader, tests, ignore):

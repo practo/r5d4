@@ -57,7 +57,7 @@ def browse_analytics(a_name, slice_args):
 
     def get_range(dimensions):
         d_range = map(lambda d: (d, sorted(list(d_range_dict[d]))),
-                    sorted(list(dimensions)))
+                      sorted(list(dimensions)))
         return d_range
 
     qnos_dimensions = query_dimensions - slice_dimensions
@@ -123,7 +123,7 @@ def browse_analytics(a_name, slice_args):
                             row[measure] += int(val)
         output.append(row)
     output_response = {
-      "status": "OK",
-      "data": output
+        "status": "OK",
+        "data": output
     }
     return output_response

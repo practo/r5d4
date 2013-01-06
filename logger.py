@@ -4,7 +4,7 @@ import r5d4.settings as settings
 from logging.handlers import RotatingFileHandler as RFHandler
 
 worker_log_formatter = logging.Formatter(settings.WORKER_LOG_FORMAT,
-        settings.WORKER_LOG_DATE_FORMAT)
+                                         settings.WORKER_LOG_DATE_FORMAT)
 activity_log_formatter = logging.Formatter('%(asctime)s\t%(message)s')
 
 

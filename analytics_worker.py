@@ -60,10 +60,12 @@ def actual_worker(analytics_name, sub, app):
                                                       dimension)
                         if tr_type == "insert":
                             value = data_db.hincrby(ref_count_key,
-                                                 transaction[field], 1)
+                                                    transaction[field],
+                                                    1)
                         elif tr_type == "delete":
                             value = data_db.hincrby(ref_count_key,
-                                                 transaction[field], -1)
+                                                    transaction[field],
+                                                    -1)
                             if value == 0:
                                 data_db.hdel(ref_count_key, transaction[field])
 
@@ -97,7 +99,7 @@ def actual_worker(analytics_name, sub, app):
 
                 except Exception, e:
                     log.error("Error while consuming transaction.\n%s" %
-                            traceback.format_exc())
+                              traceback.format_exc())
                     log.debug("Resource was: %s" % content["channel"])
                     log.debug("Data was: %s" % json.dumps(data))
     except Exception, e:
@@ -121,7 +123,8 @@ class AnalyticsWorker():
     def create_worker(self, a_name):
         sub = self.conf_db.pubsub()
         sub.subscribe(self.conf_db.smembers(
-                "Analytics:ByName:%s:Subscriptions" % a_name))
+            "Analytics:ByName:%s:Subscriptions" % a_name
+        ))
         self.subs[a_name] = sub
 
         prev_chld_handler = signal.signal(signal.SIGCHLD, signal.SIG_DFL)
@@ -164,7 +167,8 @@ class AnalyticsWorker():
         for a_name in old_a_name & new_a_name:
             old_subs = self.subs[a_name].channels
             new_subs = self.conf_db.smembers(
-                    "Analytics:ByName:%s:Subscriptions" % a_name)
+                "Analytics:ByName:%s:Subscriptions" % a_name
+            )
             add_sub = new_subs - old_subs
             for s in add_sub:
                 self.subs[a_name].subscribe(s)
@@ -197,8 +201,9 @@ class AnalyticsWorker():
     def child_handler(self, sig_val, ret_code):
         for a_name in self.proc.keys():
             if not self.proc[a_name].is_alive():
-                self.log.warn("Worker Process for %s is not alive, respawning"
-                        % a_name)
+                self.log.warn(
+                    "Worker Process for %s is not alive, respawning" % a_name
+                )
                 self.destroy_worker(a_name)
                 self.create_worker(a_name)
 

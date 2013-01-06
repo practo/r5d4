@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from dateutil.parser import parse
 from datetime import timedelta
 from r5d4.utility import (date_iterator, week_iterator, month_iterator,
-  year_iterator)
+                          year_iterator)
 
 
 # Measuring functions
@@ -113,7 +113,7 @@ def parse_string(val):
     val = str(val)
     if ':' in val:
         raise ValueError(
-                "invalid value for string ('%s'), ':' is not allowed" % val)
+            "invalid value for string ('%s'), ':' is not allowed" % val)
     return val.strip()
 
 
@@ -296,7 +296,7 @@ def expand_string(range_str):
     """
     if RANGE_OPERATOR in range_str:
         raise ValueError("range operator is not supported for string ('%s')" %
-            range_str)
+                         range_str)
     return set(map(parse_string, range_str.split(',')))
 
 
