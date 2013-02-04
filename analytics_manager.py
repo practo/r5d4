@@ -97,4 +97,5 @@ if __name__ == "__main__":
             print "Error: %s is not in the list of commands" % command
             amgr.print_usage()
     else:
+        amgr = AnalyticsManager(run.app)
         amgr.print_usage()
