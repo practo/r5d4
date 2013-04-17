@@ -185,9 +185,11 @@ class AnalyticsWorker():
         commands = self.conf_db.pubsub()
         commands.subscribe('AnalyticsWorkerCmd')
         for cmd in commands.listen():
-            if cmd["data"].lower() == "refresh":
-                self.update_analytics()
-            self.log.info("AnalyticsWorker refreshed")
+            if cmd['type'] == 'message':
+                self.log.debug('Received %s', cmd['data'])
+                if cmd["data"].lower() == "refresh":
+                    self.update_analytics()
+                self.log.info("AnalyticsWorker refreshed")
 
     def __del__(self):
         signal.signal(signal.SIGCHLD, signal.SIG_DFL)
