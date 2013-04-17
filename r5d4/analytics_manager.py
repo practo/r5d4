@@ -47,7 +47,7 @@ class AnalyticsManager:
                 "Use 'load' command and the analytics json file\n"
             )
         self.cdb.sadd("Analytics:Active", a_name)
-        subs = self.cdb.smembers("Analtyics:ByName:%s:Subscriptions" % a_name)
+        subs = self.cdb.smembers("Analytics:ByName:%s:Subscriptions" % a_name)
         for sub in subs:
             self.cdb.sadd("Subscriptions:%s:ActiveAnalytics" % sub, a_name)
         self.cdb.publish("AnalyticsWorkerCmd", "refresh")
