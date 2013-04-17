@@ -66,7 +66,7 @@ def get_conf_db(app=current_app, exclusive=False):
 def get_data_db(data_db=None, app=current_app):
     if data_db is None:
         data_db = app.config["DEFAULT_DATA_DB"]
-    return  connect_redis(
+    return connect_redis(
         unix_socket_path=app.config["REDIS_UNIX_SOCKET_PATH"],
         host=app.config["REDIS_HOST"],
         port=app.config["REDIS_PORT"],
