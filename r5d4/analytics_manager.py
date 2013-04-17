@@ -99,4 +99,5 @@ if __name__ == "__main__":
                              command)
             amgr.display_usage()
     else:
+        amgr = AnalyticsManager(app)
         amgr.display_usage()
