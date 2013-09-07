@@ -1,7 +1,6 @@
 *.pyc
 *.pyo
 *~
-r5d4/settings.py
-r5d4/test_settings.py
-definitions/
-*.log
+/r5d4/settings.py
+/r5d4/test_settings.py
+/venv

@@ -15,13 +15,15 @@ def polish():
         with settings(hide('running'), warn_only=True):
             # Remove compiled python classes
             info('Removing compiled python classes...')
-            local('pyclean .')
-            local('find . -name "*.py[co]" -print0 | xargs -0 rm -f')
+            local('pyclean ./r5d4 ./tests ./scripts fabfile.py run.py')
+            local('find ./r5d4 ./tests ./scripts fabfile.py run.py '
+                  '-name "*.py[co]" -print0 | xargs -0 rm -f')
 
             # Fix file permissions
             info('Fixing file permissions...')
             local('find . '
-                  '-path .git -prune -o '
+                  '-path ./.git -prune -o '
+                  '-path ./venv -prune -o '
                   '\( -name "analytics.py" -o '
                   '-name "analytics_manager.py" -o '
                   '-name "analytics_worker.py" -o '
@@ -35,16 +37,17 @@ def polish():
 
             # Run coding standards check
             info('Running coding standards check...')
-            local('pep8 .')
+            local('pep8 ./r5d4 ./tests ./scripts fabfile.py run.py')
 
             # Run static code analyzer
             info('Running static code analyzer...')
-            local('pyflakes .')
+            local('pyflakes ./r5d4 ./tests ./scripts fabfile.py run.py')
 
             # Find merge conflict leftovers
             info('Finding merge conflict leftovers...')
             local('! find . '
-                  '-path .git -prune -o '
+                  '-path ./.git -prune -o '
+                  '-path ./venv -prune -o '
                   '-wholename "./fabfile.py" -o '
                   '-type d -o '
                   '-print0 | '
@@ -53,6 +56,8 @@ def polish():
             # Check for debug print statements
             info('Checking for debug print statements...')
             local('! find . -type f '
+                  '-path ./.git -prune -o '
+                  '-path ./venv -prune -o '
                   '-wholename "./fabfile.py" -o '
                   '-name "*.py" -print0 | '
                   'xargs -0 grep -Pn \'(?<![Bb]lue)print\'')
