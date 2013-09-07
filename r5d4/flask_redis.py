@@ -4,20 +4,22 @@ import redis
 
 def connect_redis(unix_socket_path, host, port, db):
     """
-    >>> connect_redis(RTC["unix_socket_path"], RTC["host"], RTC["port"],
-    >>>         CONFIG_DB) is not None
+    >>> from r5d4.test_settings import (REDIS_UNIX_SOCKET_PATH,
+    ...     REDIS_HOST, REDIS_PORT, CONFIG_DB)
+    >>> connect_redis(REDIS_UNIX_SOCKET_PATH, REDIS_HOST, REDIS_PORT,
+    ...               CONFIG_DB) is not None
     True
 
-    >>> connect_redis("/tmp/unknown.sock", RTC["host"], RTC["port"],
-    >>>         CONFIG_DB) is not None
+    >>> connect_redis("/tmp/unknown.sock", REDIS_HOST, REDIS_PORT,
+    ...               CONFIG_DB) is not None
     True
 
-    >>> connect_redis(RTC["unix_socket_path"], "unknown", 666,
-    >>>         CONFIG_DB) is not None
+    >>> connect_redis(REDIS_UNIX_SOCKET_PATH, "unknown", 666,
+    ...               CONFIG_DB) is not None
     True
 
     >>> connect_redis("/tmp/unknown.sock", "unknown", 666,
-    >>>         CONFIG_DB) is not None
+    ...               CONFIG_DB) is not None
     False
     """
 

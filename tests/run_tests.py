@@ -14,6 +14,7 @@ from r5d4.test_settings import REDIS_UNIX_SOCKET_PATH, REDIS_HOST, \
 
 def load_tests(loader, tests, ignore):
     # Loading doctests from modules
+    tests.addTests(doctest.DocTestSuite(r5d4.flask_redis))
     tests.addTests(doctest.DocTestSuite(r5d4.utility))
     tests.addTests(doctest.DocTestSuite(r5d4.mapping_functions))
     tests.addTests(doctest.DocTestSuite(r5d4.analytics_browser))
