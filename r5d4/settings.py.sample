@@ -8,7 +8,6 @@ DEBUG = False
 SECRET_KEY = "replace_this_with_something_unique_and_long"
 
 # Redis configuration
-REDIS_UNIX_SOCKET_PATH = '/tmp/redis.sock'
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 CONFIG_DB = 1  # Analytics definitions and channel subscription keys are here

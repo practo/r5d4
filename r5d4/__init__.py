@@ -10,7 +10,6 @@ from r5d4.logger import get_activity_log
 app = Flask(__name__)
 
 app.config["DEBUG"] = settings.DEBUG
-app.config["REDIS_UNIX_SOCKET_PATH"] = settings.REDIS_UNIX_SOCKET_PATH
 app.config["REDIS_HOST"] = settings.REDIS_HOST
 app.config["REDIS_PORT"] = settings.REDIS_PORT
 app.config["CONFIG_DB"] = settings.CONFIG_DB

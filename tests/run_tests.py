@@ -8,8 +8,7 @@ from r5d4 import app
 from r5d4.analytics_worker import start_analytics_worker
 from r5d4.analytics_manager import AnalyticsManager
 from r5d4.flask_redis import get_conf_db
-from r5d4.test_settings import REDIS_UNIX_SOCKET_PATH, REDIS_HOST, \
-    REDIS_PORT, CONFIG_DB
+from r5d4.test_settings import REDIS_HOST, REDIS_PORT, CONFIG_DB
 
 
 def load_tests(loader, tests, ignore):
@@ -29,7 +28,6 @@ def make_absolute_path(relative_path):
 class r5d4TestCase(unittest.TestCase):
     def setUp(self):
         app.config["TESTING"] = True
-        app.config["REDIS_UNIX_SOCKET_PATH"] = REDIS_UNIX_SOCKET_PATH
         app.config["REDIS_HOST"] = REDIS_HOST
         app.config["REDIS_PORT"] = REDIS_PORT
         app.config["CONFIG_DB"] = CONFIG_DB
