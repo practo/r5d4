@@ -7,7 +7,6 @@ import r5d4
 from r5d4 import app
 from r5d4.analytics_worker import start_analytics_worker
 from r5d4.analytics_manager import AnalyticsManager
-from r5d4.flask_redis import get_conf_db
 from r5d4.test_settings import REDIS_UNIX_SOCKET_PATH, REDIS_HOST, \
     REDIS_PORT, CONFIG_DB
 
@@ -33,8 +32,6 @@ class r5d4TestCase(unittest.TestCase):
         app.config["REDIS_HOST"] = REDIS_HOST
         app.config["REDIS_PORT"] = REDIS_PORT
         app.config["CONFIG_DB"] = CONFIG_DB
-        self.conf_db = get_conf_db(app)
-        self.conf_db.flushall()
         self.flask_app = app
         self.app = app.test_client()
         self.analytics_worker = start_analytics_worker(app=app)
@@ -49,7 +46,6 @@ class r5d4TestCase(unittest.TestCase):
             if self.analytics_worker.is_alive():
                 self.analytics_worker.terminate()
             self.analytics_worker.join()
-        self.conf_db.flushall()
 
 
 if __name__ == "__main__":
